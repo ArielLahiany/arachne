@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"flag"
 	"fmt"
 	"log"
@@ -20,8 +21,17 @@ var (
 	)
 )
 
+type JSONResponse struct {
+	Body string `json:"body"`
+}
+
 func rootHandler(w http.ResponseWriter, r *http.Request) {
-	log.Printf("Hello, world!")
+	response := &JSONResponse{
+		Body: "Hello, world!",
+	}
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusCreated)
+	json.NewEncoder(w).Encode(response)
 }
 
 func main() {
