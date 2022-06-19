@@ -1,0 +1,16 @@
+name: "docker"
+on:
+  push:
+    branches:
+      - "main"
+jobs:
+  docker:
+    runs-on: "ubuntu-22.04"
+    steps:
+      - id: "checkout"
+        name: "checks out the repository"
+        uses: "actions/checkout@v2"
+
+      - id: "qemu"
+        name: "sets up a QEMU emulator"
+        uses: "docker/setup-qemu-action@v2"
