@@ -6,7 +6,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/ArielLahiany/arachne/pkg/attack"
+	"github.com/ArielLahiany/arachne/pkg/router"
 )
 
 var (
@@ -28,7 +28,8 @@ func main() {
 		*addr,
 		*port,
 	)
-	http.HandleFunc("/attack", attack.AttackHandler)
+	r := router.NewAttackRouter()	
+	http.HandleFunc("/attack", r.GetAttack)
 	err := http.ListenAndServe(
 		fmt.Sprintf(
 			"%s:%v",
