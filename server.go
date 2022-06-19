@@ -1,18 +1,19 @@
 package main
 
 import (
-	"encoding/json"
 	"flag"
 	"fmt"
 	"log"
 	"net/http"
+
+	"github.com/ArielLahiany/arachne/pkg/attack"
 )
 
 var (
 	addr = flag.String(
 		"addr",
 		"0.0.0.0",
-		"Listening address of the server on the",
+		"Listening address of the server",
 	)
 	port = flag.Int(
 		"port",
@@ -21,26 +22,13 @@ var (
 	)
 )
 
-type JSONResponse struct {
-	Body string `json:"body"`
-}
-
-func rootHandler(w http.ResponseWriter, r *http.Request) {
-	response := &JSONResponse{
-		Body: "Hello, world!",
-	}
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusCreated)
-	json.NewEncoder(w).Encode(response)
-}
-
 func main() {
 	flag.Parse()
 	log.Printf("Listening and serving on %s:%v",
 		*addr,
 		*port,
 	)
-	http.HandleFunc("/", rootHandler)
+	http.HandleFunc("/attack", attack.AttackHandler)
 	err := http.ListenAndServe(
 		fmt.Sprintf(
 			"%s:%v",
