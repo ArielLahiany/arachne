@@ -1,0 +1,16 @@
+name: "binary"
+
+on:
+  push:
+    branches:
+      - "main"
+    paths-ignore:
+      - "*.md"
+
+jobs:
+  binary:
+    runs-on: "ubuntu-22.04"
+    steps:
+      - id: "checkout"
+        name: "checks out the repository"
+        uses: "actions/checkout@v2"
