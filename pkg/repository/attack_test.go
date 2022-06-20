@@ -11,10 +11,11 @@ func TestSelectSingle(t *testing.T) {
 		t.Fatal(err)
 	}
 	t.Logf(
-		"Identifier: %v, Created at: %v, Updated at: %v, Target: %v",
+		"Identifier: %v, Created at: %v, Updated at: %v, Tpe: %v, Target: %v",
 		attack.ID,
 		attack.CreatedAt,
 		attack.UpdatedAt,
+		attack.Type,
 		attack.Target,
 	)
 }

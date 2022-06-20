@@ -24,6 +24,7 @@ func (r *AttackRepository) SelectSingle(id int) (*model.Attack, error) {
 		&attack.ID,
 		&attack.CreatedAt,
 		&attack.UpdatedAt,
+		&attack.Type,
 		&attack.Target,
 	)
 
