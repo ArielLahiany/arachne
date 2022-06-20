@@ -1,0 +1,54 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:14.3-alpine3.16
+    container_name: postgres
+    hostname: postgres
+    restart: unless-stopped
+    networks:
+      - arachne
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: pg_isready -U arachne
+      interval: 5s
+      timeout: 60s
+      retries: 5
+    environment:
+        POSTGRES_USER: arachne
+        POSTGRES_PASSWORD: arachne
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  rabbitmq:
+    image: rabbitmq:3.9.20-management-alpine
+    container_name: rabbitmq
+    hostname: rabbitmq
+    restart: unless-stopped
+    networks:
+      - arachne
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 5s
+      timeout: 60s
+      retries: 5
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+
+networks:
+  arachne:
+    name: arachne
+    driver: bridge
+
+volumes:
+  postgres-data:
+    name: postgres-data
+    driver: local
+
+  rabbitmq-data:
+    name: rabbitmq-data
+    driver: local
