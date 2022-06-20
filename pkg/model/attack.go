@@ -7,7 +7,8 @@ import (
 type Attack struct {
 	ID			int64		`db:"id" json:"id"`
 	CreatedAt	time.Time 	`db:"created_at" json:"createdAt"`
-	UpdatedAt 	time.Time 	`db:"updated_at" json:"updatedAt"`
+	UpdatedAt 	time.Time	`db:"updated_at" json:"updatedAt"`
+	Type		string		`db:"type" json:"type"`
 	Target		string		`db:"target" json:"target"`
 }
 
@@ -16,5 +17,6 @@ type AttackResponse struct {
 }
 
 type CreateAttack struct {
+	Type	string	`db:"type" json:"type"`
 	Target	string	`db:"target" json:"target"`
 }
