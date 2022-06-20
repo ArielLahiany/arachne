@@ -13,6 +13,7 @@ func NewAttackRouter() *AttackRouter {
 	return router
 }
 
+// TODO: maybe this should be removed.
 type AttackRouterInterface interface {
 	GetAttack(w http.ResponseWriter, r *http.Request)
 }
