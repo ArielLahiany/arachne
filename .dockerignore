@@ -1,0 +1,26 @@
+# Artifacts
+art
+
+# Docker
+.dockerignore
+Dockerfile
+docker-compose.yaml
+
+# JetBrains
+.idea
+
+# Make
+Makefile
+
+# Markdown
+*.md
+
+# Source control
+.git
+.gitignore
+
+# SQL
+sql
+
+# Visual Studio Code
+.vscode
