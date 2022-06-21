@@ -15,9 +15,9 @@ var (
 		"0.0.0.0",
 		"Listening address of the server",
 	)
-	port = flag.Int(
+	port = flag.String(
 		"port",
-		8080,
+		"8080",
 		"Listening port of the server",
 	)
 )
@@ -28,11 +28,11 @@ func main() {
 		*addr,
 		*port,
 	)
-	r := router.NewAttackRouter()	
+	r := router.NewAttackRouter()
 	http.HandleFunc("/attack", r.GetAttack)
 	err := http.ListenAndServe(
 		fmt.Sprintf(
-			"%s:%v",
+			"%s:%s",
 			*addr,
 			*port,
 		),
